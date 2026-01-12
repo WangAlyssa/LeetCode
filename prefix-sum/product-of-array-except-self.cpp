@@ -4,17 +4,16 @@ public:
         int n = nums.size();
         vector<int> product(n, 1);
 
+        int left = 1;
         for (int i = 0; i < n; i++) {
-            int temp = nums[i];
-            nums[i] = 1;
+            product[i] = left;
+            left *= nums[i];
+        }
 
-            int currentProduct = 1;
-            for (int j = 0; j < n; j++) {
-                currentProduct *= nums[j];
-            }
-
-            product[i] = currentProduct;
-            nums[i] = temp;
+        int right = 1;
+        for (int j = n - 1; j >= 0; j--) {
+            product[j] *= right;
+            right *= nums[j];
         }
 
         return product;
